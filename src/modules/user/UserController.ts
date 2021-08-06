@@ -12,13 +12,14 @@ import { UserService } from './UserService';
 @injectable()
 export default class UserController {
   constructor(
-    @inject(UserService) protected userService: UserService,
+    protected userService: UserService,
     @inject(Router) public router: Router,
   ) {
-    this.router.get('/', this.get);
+    this.router.get('/:id', this.get.bind(this));
   }
 
   get(req: Request, res: Response) {
-    res.json({ name: 'Parvez M Robin' });
+    const user = this.userService.get(Number(req.params.id))
+    res.json(user);
   }
 }

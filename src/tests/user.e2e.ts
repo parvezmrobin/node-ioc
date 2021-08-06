@@ -9,9 +9,9 @@ import app from '../app';
 
 describe('User E2E test', function () {
   it('should get a user', function () {
-    return supertest(app).get('/users')
-      .expect('Content-Type', /json/)
+    return supertest(app).get('/users/1')
       .expect(200)
-      .expect({ name: 'Parvez M Robin' });
+      .expect('Content-Type', /json/)
+      .expect({ id: 1, name: 'Parvez' });
   });
 });

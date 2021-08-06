@@ -17,7 +17,9 @@ rootContainer.bind(CoreRouter).to(CoreRouter);
 const moduleContainers = [userModule];
 
 for (const moduleContainer of moduleContainers) {
-  rootContainer = Container.merge(rootContainer, moduleContainer);
+  rootContainer = Container.merge(moduleContainer, rootContainer);
 }
+
+rootContainer.options.defaultScope = 'Singleton';
 
 export default rootContainer;
