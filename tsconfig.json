@@ -6,7 +6,7 @@
     "moduleResolution": "Node",
     "target": "es5",
     "lib": ["es6"],
-    "types": ["reflect-metadata"],
+    "types": ["reflect-metadata", "jest", "supertest"],
     "sourceMap": true,
     "noImplicitAny": true,
     "experimentalDecorators": true,

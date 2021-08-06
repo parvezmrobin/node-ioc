@@ -1,9 +1,12 @@
+import 'reflect-metadata';
 import * as express from 'express';
 import * as path from 'path';
 import * as cookieParser from 'cookie-parser';
 import * as logger from 'morgan';
-import indexRouter from './routes';
-import usersRouter from './routes/users';
+import rootContainer from './container';
+import CoreRouter from './router';
+
+const coreRouter = rootContainer.get(CoreRouter);
 
 const app = express();
 
@@ -13,7 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', coreRouter.router);
 
 export default app;

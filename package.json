@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"yarn serve\" \"yarn watch\" -c blue,cyan --names serve,watch",
+    "start": "concurrently \"yarn serve\" \"yarn watch\" -c blue,cyan --names serve,watch --prefix \"[{time} | {name}]\" -t \"HH:mm:ss\" --handle-input",
     "serve": "nodemon dist/bin/www.js",
     "deploy": "node dist/bin/www.js",
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,9 +23,28 @@
     "@types/cookie-parser": "^1.4.2",
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
+    "@types/jest": "^26.0.24",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.4.13",
+    "@types/supertest": "^2.0.11",
     "concurrently": "^6.2.0",
-    "nodemon": "^2.0.12"
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.4",
+    "ts-jest": "^27.0.4"
+  },
+  "jest": {
+    "moduleFileExtensions": ["ts", "js"],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/tests/*.+(ts|tsx)"
+    ]
   }
 }
