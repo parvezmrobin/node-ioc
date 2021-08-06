@@ -7,7 +7,7 @@
 import { Router } from 'express';
 import { Container, interfaces } from 'inversify';
 import CoreRouter from './router';
-import userModule from './modules/user/module'
+import userModule from './modules/user/module';
 
 let rootContainer: interfaces.Container = new Container();
 

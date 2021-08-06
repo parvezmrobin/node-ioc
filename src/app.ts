@@ -19,8 +19,10 @@ app.use(e.static(path.join(__dirname, 'public')));
 app.use('/', coreRouter.router);
 
 // noinspection JSUnusedLocalSymbols
-app.use((err: unknown, req: e.Request, res: e.Response, next: e.NextFunction) => {
-  console.error(err);
-});
+app.use(
+  (err: unknown, req: e.Request, res: e.Response, next: e.NextFunction) => {
+    console.error(err);
+  }
+);
 
 export default app;

@@ -48,7 +48,7 @@ function normalizePort(val?: string) {
   return false;
 }
 
-interface SystemError extends Error{
+interface SystemError extends Error {
   syscall: string;
   code: string;
 }
@@ -62,9 +62,7 @@ function onError(error: SystemError) {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -87,8 +85,7 @@ function onError(error: SystemError) {
 
 function onListening() {
   const address = server.address();
-  const bind = typeof address === 'string'
-    ? 'pipe ' + address
-    : 'port ' + address.port;
+  const bind =
+    typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port;
   debug('Listening on ' + bind);
 }

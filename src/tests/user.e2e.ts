@@ -9,7 +9,8 @@ import app from '../app';
 
 describe('User E2E test', function () {
   it('should get a user', function () {
-    return supertest(app).get('/users/1')
+    return supertest(app)
+      .get('/users/1')
       .expect(200)
       .expect('Content-Type', /json/)
       .expect({ id: 1, name: 'Parvez' });

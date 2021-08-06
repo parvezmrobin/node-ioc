@@ -1,19 +1,12 @@
-import {
-  Request,
-  Response,
-  Router,
-} from 'express';
-import {
-  inject,
-  injectable,
-} from 'inversify';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
 import UserController from './modules/user/UserController';
 
 @injectable()
 export default class CoreRouter {
   constructor(
-    @inject(UserController) protected userController: UserController,
-    @inject(Router) public router: Router,
+    protected userController: UserController,
+    @inject(Router) public router: Router
   ) {
     this.router.use('/users', this.userController.router);
     this.router.get('/', this.get);
