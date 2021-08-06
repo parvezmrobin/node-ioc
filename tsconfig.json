@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": "src/",
+    "outDir": "dist",
     "module": "commonjs",
+    "moduleResolution": "Node",
     "target": "es5",
+    "lib": ["es6"],
+    "types": ["reflect-metadata"],
     "sourceMap": true,
     "noImplicitAny": true,
-    "esModuleInterop": true,
-    "baseUrl": ".",
-    "outDir": "dist"
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": [
     "node_modules"

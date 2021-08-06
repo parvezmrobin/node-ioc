@@ -1,7 +1,7 @@
-import express from 'express';
-import path from 'path';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
+import * as express from 'express';
+import * as path from 'path';
+import * as cookieParser from 'cookie-parser';
+import * as logger from 'morgan';
 import indexRouter from './routes';
 import usersRouter from './routes/users';
 
