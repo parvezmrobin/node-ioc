@@ -58,6 +58,8 @@ interface SystemError extends Error {
  */
 
 function onError(error: SystemError) {
+  console.error(error);
+
   if (error.syscall !== 'listen') {
     throw error;
   }

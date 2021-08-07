@@ -24,7 +24,7 @@ const users: User[] = [
 ];
 
 @injectable()
-export class UserRepository {
+export default class UserRepository {
   get(id: number) {
     return users.find((user) => user.id === id);
   }

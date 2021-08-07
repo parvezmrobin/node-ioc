@@ -1,17 +1,10 @@
-import { Request, Response, Router } from 'express';
-import { inject, injectable } from 'inversify';
-import UserController from './modules/user/UserController';
+import { Request, Response } from 'express';
+import { controller, httpGet } from 'inversify-express-utils';
+import './modules/user/UserController';
 
-@injectable()
+@controller('/')
 export default class CoreRouter {
-  constructor(
-    protected userController: UserController,
-    @inject(Router) public router: Router
-  ) {
-    this.router.use('/users', this.userController.router);
-    this.router.get('/', this.get);
-  }
-
+  @httpGet('/')
   get(req: Request, res: Response) {
     res.json({ message: 'This is a IoC container test.' });
   }

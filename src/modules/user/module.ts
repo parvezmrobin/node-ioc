@@ -4,15 +4,15 @@
  * August 06, 2021
  */
 
-import { Container } from 'inversify';
+import { ContainerModule } from 'inversify';
 import UserController from './UserController';
-import { UserRepository } from './UserRepository';
-import { UserService } from './UserService';
+import UserRepository from './UserRepository';
+import UserService from './UserService';
 
-const userContainer = new Container();
-
-userContainer.bind(UserRepository).to(UserRepository);
-userContainer.bind(UserService).to(UserService);
-userContainer.bind(UserController).to(UserController);
+const userContainer = new ContainerModule((bind) => {
+  bind(UserRepository).toSelf();
+  bind(UserService).toSelf();
+  bind(UserController).toSelf();
+});
 
 export default userContainer;

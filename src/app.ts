@@ -1,28 +1,15 @@
 import 'reflect-metadata';
 import * as e from 'express';
-import * as path from 'path';
-import * as cookieParser from 'cookie-parser';
+import { InversifyExpressServer } from 'inversify-express-utils';
 import * as logger from 'morgan';
-import rootContainer from './container';
-import CoreRouter from './router';
+import container from './container';
+import './router';
 
-const coreRouter = rootContainer.get(CoreRouter);
+const expressServer = new InversifyExpressServer(container);
+expressServer.setConfig((app) => {
+  app.use(logger('dev'));
+  app.use(e.json());
+  app.use(e.urlencoded({ extended: false }));
+});
 
-const app = e();
-
-app.use(logger('dev'));
-app.use(e.json());
-app.use(e.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(e.static(path.join(__dirname, 'public')));
-
-app.use('/', coreRouter.router);
-
-// noinspection JSUnusedLocalSymbols
-app.use(
-  (err: unknown, req: e.Request, res: e.Response, next: e.NextFunction) => {
-    console.error(err);
-  }
-);
-
-export default app;
+export default expressServer.build();

@@ -1,18 +1,20 @@
-import { Request, Response, Router } from 'express';
-import { inject, injectable } from 'inversify';
-import { UserService } from './UserService';
+import {
+  BaseHttpController,
+  controller,
+  httpGet,
+  requestParam,
+} from 'inversify-express-utils';
+import UserService from './UserService';
 
-@injectable()
-export default class UserController {
-  constructor(
-    protected userService: UserService,
-    @inject(Router) public router: Router
-  ) {
-    this.router.get('/:id', this.get.bind(this));
+@controller('/users')
+export default class UserController extends BaseHttpController {
+  constructor(protected userService: UserService) {
+    super();
   }
 
-  get(req: Request, res: Response) {
-    const user = this.userService.get(Number(req.params.id));
-    res.json(user);
+  @httpGet('/:id')
+  get(@requestParam('id') id: string) {
+    const user = this.userService.get(Number(id));
+    return this.json(user);
   }
 }

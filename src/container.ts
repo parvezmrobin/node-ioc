@@ -9,17 +9,17 @@ import { Container, interfaces } from 'inversify';
 import CoreRouter from './router';
 import userModule from './modules/user/module';
 
-let rootContainer: interfaces.Container = new Container();
+const rootContainer: interfaces.Container = new Container({
+  defaultScope: 'Singleton',
+});
 
 rootContainer.bind(Router).toFactory(() => Router());
-rootContainer.bind(CoreRouter).to(CoreRouter);
+rootContainer.bind(CoreRouter).to(CoreRouter).inTransientScope();
 
-const moduleContainers = [userModule];
+const containerModules = [userModule];
 
-for (const moduleContainer of moduleContainers) {
-  rootContainer = Container.merge(moduleContainer, rootContainer);
+for (const containerModule of containerModules) {
+  rootContainer.load(containerModule);
 }
-
-rootContainer.options.defaultScope = 'Singleton';
 
 export default rootContainer;
