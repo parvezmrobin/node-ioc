@@ -8,10 +8,12 @@ import { injectable } from 'inversify';
 import UserRepository from './UserRepository';
 
 @injectable()
-export default class UserService {
+class UserService {
   constructor(protected userRepository: UserRepository) {}
 
   get(id: number) {
     return this.userRepository.get(id);
   }
 }
+
+export default UserService;
