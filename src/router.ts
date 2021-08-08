@@ -1,11 +1,15 @@
-import { Request, Response } from 'express';
-import { controller, httpGet } from 'inversify-express-utils';
+import {
+  BaseHttpController,
+  controller,
+  httpGet,
+} from 'inversify-express-utils';
+import './modules/auth/AuthController';
 import './modules/user/UserController';
 
 @controller('/')
-export default class CoreRouter {
+export default class CoreRouter extends BaseHttpController {
   @httpGet('/')
-  get(req: Request, res: Response) {
-    res.json({ message: 'This is a IoC container test.' });
+  get(): void {
+    this.json({ message: 'This is a IoC container test' });
   }
 }

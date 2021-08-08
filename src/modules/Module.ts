@@ -27,11 +27,11 @@ export default class Module extends ContainerModule {
          */
         binding.when((request) => {
           const parentImplementation =
-            request.parentRequest.bindings[0].implementationType;
+            request.parentRequest?.bindings[0].implementationType;
 
           if (typeof parentImplementation !== 'function') {
             throw new Error(
-              `Not Implemented for ${typeof parentImplementation}`
+              `Not Implemented for ${typeof parentImplementation}`,
             );
           }
 
@@ -40,9 +40,9 @@ export default class Module extends ContainerModule {
 
           if (isCalledByPublic) {
             throw new Error(
-              `${request.bindings[0].implementationType.name} is not in public scope.\n` +
+              `${request.bindings[0].implementationType?.name} is not in public scope.\n` +
                 `It cannot be loaded in ${parentImplementation.name}.\n` +
-                'Consider making it public by passing it in exports parameter in Module constructor'
+                'Consider making it public by passing it in exports parameter in Module constructor',
             );
           }
 

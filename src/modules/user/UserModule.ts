@@ -10,8 +10,8 @@ import UserRepository from './UserRepository';
 import UserService from './UserService';
 
 const userModule = new Module({
-  providers: [UserController, UserRepository, UserService],
-  exports: [],
+  providers: [UserController, UserService, UserRepository],
+  exports: [UserService],
 });
 
 export default userModule;

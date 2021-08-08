@@ -4,8 +4,16 @@ import { InversifyExpressServer } from 'inversify-express-utils';
 import * as logger from 'morgan';
 import container from './container';
 import './router';
+import AuthProvider from './modules/auth/AuthProvider';
 
-const expressServer = new InversifyExpressServer(container);
+const expressServer = new InversifyExpressServer(
+  container,
+  null,
+  null,
+  null,
+  AuthProvider,
+);
+
 expressServer.setConfig((app) => {
   app.use(logger('dev'));
   app.use(e.json());
