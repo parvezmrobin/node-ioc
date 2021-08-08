@@ -6,8 +6,9 @@
 
 import { Router } from 'express';
 import { Container, interfaces } from 'inversify';
-import CoreRouter from './router';
+import authModule from './modules/auth/AuthModule';
 import userModule from './modules/user/UserModule';
+import CoreRouter from './router';
 
 const container: interfaces.Container = new Container({
   defaultScope: 'Singleton',
@@ -16,7 +17,7 @@ const container: interfaces.Container = new Container({
 container.bind(Router).toFactory(() => Router());
 container.bind(CoreRouter).to(CoreRouter).inTransientScope();
 
-const containerModules = [userModule];
+const containerModules = [userModule, authModule];
 
 for (const containerModule of containerModules) {
   container.load(containerModule);

@@ -15,12 +15,10 @@ import * as appConfig from '../../config/app.json';
 import UserService from '../user/UserService';
 
 class Principal implements interfaces.Principal {
-  details: unknown;
-
-  constructor(protected user?: User) {}
+  constructor(public details: User | undefined) {}
 
   async isAuthenticated() {
-    return !!this.user;
+    return !!this.details;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -43,9 +41,13 @@ export default class AuthProvider implements interfaces.AuthProvider {
     let user: User | undefined;
 
     if (authorizationHeader) {
-      const token = authorizationHeader.substr('Bearer '.length);
-      const decoded = jwt.verify(token, appConfig.secret) as JwtPayload;
-      user = this.userService?.get(Number(decoded.id));
+      try {
+        const token = authorizationHeader.substr('Bearer '.length);
+        const decoded = jwt.verify(token, appConfig.secret) as JwtPayload;
+        user = this.userService?.get(Number(decoded.id));
+      } catch (e) {
+        // ignore
+      }
     }
 
     return new Principal(user);
